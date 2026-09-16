@@ -44,7 +44,7 @@
       });
     }, {
       threshold: 0.25,
-      rootMargin: '-80px 0px -50% 0px'
+      rootMargin: '-72px 0px -50% 0px'
     });
 
     sections.forEach(function (sec) {
@@ -52,8 +52,8 @@
     });
 
     // ── Publications Filtering ──
-    var pubBtns = document.querySelectorAll('.pub-btn');
-    var pubItems = document.querySelectorAll('.pub-item');
+    var pubBtns = document.querySelectorAll('.filter-tab');
+    var pubEntries = document.querySelectorAll('.pub-entry');
 
     pubBtns.forEach(function (btn) {
       btn.addEventListener('click', function () {
@@ -62,20 +62,20 @@
 
         var filter = btn.getAttribute('data-filter');
 
-        pubItems.forEach(function (item) {
-          var type = item.getAttribute('data-type');
+        pubEntries.forEach(function (entry) {
+          var type = entry.getAttribute('data-type');
           if (filter === 'all' || type === filter) {
-            item.classList.remove('hidden');
+            entry.classList.remove('hidden');
           } else {
-            item.classList.add('hidden');
+            entry.classList.add('hidden');
           }
         });
       });
     });
 
-    // ── Clean Contact Form Submission ──
+    // ── Contact Form Handling ──
     var contactForm = document.getElementById('contactForm');
-    var formMsg = document.getElementById('formMsg');
+    var formFeedback = document.getElementById('formFeedback');
     var btnSubmit = document.getElementById('btnSubmit');
 
     if (contactForm) {
@@ -92,14 +92,14 @@
         btnSubmit.textContent = 'Sending...';
 
         setTimeout(function () {
-          formMsg.className = 'form-msg success';
-          formMsg.innerHTML = 'Thank you, ' + name + '. Your message regarding "' + subject + '" has been received.';
-          formMsg.style.display = 'block';
+          formFeedback.className = 'form-feedback success';
+          formFeedback.innerHTML = 'Thank you, ' + name + '. Your message has been received.';
+          formFeedback.style.display = 'block';
 
           contactForm.reset();
           btnSubmit.disabled = false;
-          btnSubmit.textContent = 'Send Inquiry';
-        }, 700);
+          btnSubmit.textContent = 'Send Message';
+        }, 600);
       });
     }
 
